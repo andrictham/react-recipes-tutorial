@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import calendar from '../reducers/index'
+import { addRecipe, removeFromCalendar } from '../actions'
 
 class App extends Component {
 	render() {
@@ -33,4 +33,13 @@ function mapStateToProps(calendar) {
 		})),
 	}
 }
-export default connect(mapStateToProps)(App)
+
+// This function lets us dispatch an action by calling a method on our component instead of calling dispatch directly. It’s optional; we can use `dispatch` directly since we have access to it as a prop. It just lets us clean up our component.
+function mapDispatchToProps(dispatch) {
+	return {
+		selectRecipe: data => dispatch(addRecipe(data)),
+		remove: data => dispatch(removeFromCalendar(data)),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
