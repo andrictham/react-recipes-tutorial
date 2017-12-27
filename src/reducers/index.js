@@ -1,5 +1,18 @@
 import { ADD_RECIPE, REMOVE_FROM_CALENDAR } from '../actions'
 
+const food = (state = {}, action) => {
+	switch (action.type) {
+		case ADD_RECIPE:
+			const { recipe } = action
+			return {
+				...state,
+				[recipe.label]: recipe,
+			}
+		default:
+			return state
+	}
+}
+
 // Here, we define the initial state of our application, which lets us decide how the shape of our state will look like.
 const initialCalendarState = {
 	sunday: {
@@ -66,4 +79,3 @@ const calendar = (state = initialCalendarState, action) => {
 }
 
 export default calendar
-
